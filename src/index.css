@@ -1,16 +1,25 @@
+@font-face {
+  font-family: 'CarlaRegular';
+  src: url('./CarlaRegular.ttf') format('woff');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Markazi+Text:wght@600&display=swap');
+/*
+font-family: 'Markazi Text', serif;
+*/
+
+
+.primaryfont {
+  font-family: 'Markazi Text', serif;
+  font-size: 40pt;
+}
+
 body {
   width: 80%;
   margin: 0 auto;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'CarlaRegular', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 header {
@@ -27,23 +36,78 @@ nav ul {
   list-style: none;
 }
 
-main {
+.specials-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
   justify-content: space-between;
+}
+
+.specials-wrapper h6 {
+  margin-top: 10px;
 }
 
 article {
   max-width: 180px;
   overflow: hidden;
   background-color: #dfdfdf;
-  border-radius: 10px;
+  border-radius: 16px;
 }
 
 article section {
-  padding: 0 10px;
+  padding: 10px;
 }
+
+/* Call to Action */
+.callToAction {
+  margin: 5% auto;
+  display: flex;
+  align-items: center;
+}
+
+.callToAction section {
+  width: 50%;
+}
+
+.callToAction section img {
+  width: 70%;
+}
+
+.callToAction button {
+  padding: 1% 3%;
+  border: none;
+  background-color: #49AE57;
+}
+
+.callToAction button:hover {
+  padding: 1% 3%;
+  border: none;
+  background-color: #F4CE14;
+  cursor: pointer;
+}
+/* End Call to Action */
+
+/* Testimonials */
+.testimonials {
+  margin-top: 3%;
+  text-align: center;
+}
+
+.testimonials div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3%;
+}
+.testimonials section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  max-width: 120px;
+}
+
+.testimonials img{ 
+  width: 66px;
+}
+/* End Testimonials */
 
 footer{
   display: flex;
