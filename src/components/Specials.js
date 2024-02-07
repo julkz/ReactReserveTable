@@ -6,7 +6,7 @@ export default function Specials() {
     return (
         <section className="specials-wrapper">
             <article>
-                <img src={MenuImgOne} alt=""/>
+                <img src={MenuImgOne} alt="special featured"/>
                 <section>
                     <h4>Dish Title</h4>
                     <p>Dish description of wht should consist in this recipe</p>
@@ -14,7 +14,7 @@ export default function Specials() {
                 </section>
             </article>
             <article>
-                <img src={MenuImgTwo} alt=""/>
+                <img src={MenuImgTwo} alt="special featured"/>
                 <section>
                     <h4>Dish Title</h4>
                     <p>Dish description of wht should consist in this recipe</p>
@@ -22,7 +22,7 @@ export default function Specials() {
                 </section>
             </article>
             <article>
-                <img src={MenuImgThree} alt=""/>
+                <img src={MenuImgThree} alt="special featured"/>
                 <section>
                     <h4>Dish Title</h4>
                     <p>Dish description of wht should consist in this recipe</p>

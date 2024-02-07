@@ -5,17 +5,17 @@ export default function Testimonials() {
             <h2>Testimonials</h2>
             <div>
                 <section>
-                    <img src={UserIcon}/>
+                    <img src={UserIcon} alt="User icon"/>
                     <h4>Person name</h4>
                     <p>Comment from the person above.</p>
             </section>
             <section>
-                    <img src={UserIcon}/>
+                    <img src={UserIcon} alt="User icon"/>
                     <h4>Person name</h4>
                     <p>Comment from the person above.</p>
             </section>
             <section>
-                    <img src={UserIcon}/>
+                    <img src={UserIcon} alt="User icon"/>
                     <h4>Person name</h4>
                     <p>Comment from the person above.</p>
             </section>

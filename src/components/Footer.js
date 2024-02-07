@@ -7,7 +7,7 @@ export default function Footer() {
                 <p>Little Lemon Restaurant</p>
             </section>
             <section>
-                <img src={logo}  alt=""/>
+                <img src={logo}  alt="logo restaurant"/>
             </section>
         </footer>
     );
