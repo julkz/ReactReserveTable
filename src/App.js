@@ -6,6 +6,7 @@ import HomePage from './components/Homepage';
 import BookingPage from './components/BookingPage';
 import Nav from './components/Nav';
 import Header from './components/Header';
+import BookingConfirmed from './components/BookingConfirmed';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Routes> 
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/booking" element={<BookingPage />}></Route>
+          <Route path="/confirmed" element={<BookingConfirmed/>}></Route>
         </Routes>
       </Main>
       <Footer></Footer>
