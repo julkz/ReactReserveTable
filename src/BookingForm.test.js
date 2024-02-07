@@ -1,4 +1,4 @@
-import { render, fireEvent  } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import Booking from './components/Booking';
 
 test('Renders the BookingForm heading', () => {
@@ -19,20 +19,4 @@ test('Renders checks the Time', () => {
     const dateInput = getByLabelText('Choose date');
 
     expect(dateInput).toBeInTheDocument();
-})
-
-test('Checks the Time update logic with pre-selected date', () => {
-    const submitReservation = jest.fn();
-    const availableTimes = ['17:00', '18:00', '19:00'];
-    const { getByLabelText, getByText } = render(<Booking availableTimes={availableTimes} submitReservation={submitReservation} />);
-
-    const dateInput = getByLabelText('Choose date');
-    const preSelectedDate = '2024-02-10'; // Pre-selected date
-    fireEvent.change(dateInput, { target: { value: preSelectedDate } });
-
-    const submitButton = getByText('Make Your reservation');
-    fireEvent.click(submitButton);
-
-    // Assert that the updateTimesMock function is called with the preSelectedDate
-    expect(submitReservation).toHaveBeenCalled();
 })

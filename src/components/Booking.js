@@ -1,59 +1,75 @@
 import { useState } from 'react';
+import { Formik, Form, Field } from 'formik';
 
 export default function Booking(props) {
-      // Define state variables for each field in the form
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('17:00'); // Default value
-  const [guests, setGuests] = useState(1); // Default value
-  const [occasion, setOccasion] = useState('Birthday'); // Default value
-    // contains the data of the user from the reservation page which will be submitted via server to the database
-    const [reservation, setReservation] = useState({guests: guests, date: '', time: '', ocassion: occasion});
+  const [reservation, setReservation] = useState({
+    guests: 1,
+    date: '',
+    time: '17:00',
+    occasion: 'Birthday'
+  });
+  const [formErrors, setFormErrors] = useState({}); // State for form validation errors
 
-    const handleDateChange = (event) => {
-       // updateTimes(event.target.value);
-        setDate(event.target.value);
-      };
+  const handleDateChange = (event) => {
+    const selectedDate = event.target.value;
+    setReservation({ ...reservation, date: selectedDate });
+  };
 
-    // Handle form submission
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('Form submitted:', { date, time, guests, occasion });
-        props.submitReservation(reservation);
-      };
+  const handleSubmit = (values) => {
+    console.log('Form submitted:', values);
+    if (!reservation.date || reservation.date === "2000-01-01") {
+      setFormErrors({ ...formErrors, date: 'Date is required' });
+      return;
+    }
+    props.submitReservation(values);
+  };
 
-      const handleTime = (e) => {
-        setTime(e);
-        setReservation({...reservation, time: time});
-      };
-      const handleGuests = (e) => {
-        setGuests(e);
-        setReservation({...reservation, guests: guests});
-      };
-      const handleOcasion = (e) => {
-        setOccasion(e);
-        setReservation({...reservation, ocassion: occasion});
-      };
+  return (
+    <section className="booking-wrapper">
+      <Formik
+        initialValues={reservation}
+        onSubmit={handleSubmit}
+        validate={(values) => {
+          const errors = {};
+          if (!values.date) {
+            errors.date = 'Date is required';
+          }
+          if (!values.time) {
+            errors.time = 'Time is required';
+          }
+          if (!values.guests || values.guests < 1) {
+            errors.guests = 'Number of guests must be at least 1';
+          }
+          return errors;
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form style={{ display: 'grid', maxWidth: '250px', gap: '20px' }} onSubmit={handleSubmit}>
+            <label htmlFor="res-date" aria-label="On Click">Choose date</label>
+            <Field type="date" id="res-date" name="date" onChange={handleDateChange} value={reservation.date} required />
+            {formErrors.date && <span style={{ color: 'red' }}>{formErrors.date}</span>} {/* Display validation error */}
 
-      return (
-        <section className="booking-wrapper">
-          <form style={{ display: 'grid', maxWidth: '250px', gap: '20px' }} onSubmit={handleSubmit}>
-            <label htmlFor="res-date">Choose date</label>
-            <input type="date" id="res-date" value={date} onChange={handleDateChange} />
-            <label htmlFor="res-time">Choose time</label>
-            <select id="res-time" value={time} onChange={(e) => setTime(e.target.value)}>
+            <label htmlFor="res-time" aria-label="On Click">Choose time</label>
+            <Field as="select" id="res-time" name="time" required>
+              <option value="">Select time</option>
               {props.availableTimes.map((availableTime, index) => (
                 <option key={index}>{availableTime}</option>
               ))}
-            </select>
-            <label htmlFor="guests">Number of guests</label>
-            <input type="number" placeholder="1" min="1" max="10" id="guests" value={guests} onChange={(e) => setGuests(parseInt(e.target.value))} />
+            </Field>
+
+            <label htmlFor="guests" aria-label="On Click">Number of guests</label>
+            <Field type="number" id="guests" name="guests" min="1" max="10" required />
+
             <label htmlFor="occasion">Occasion</label>
-            <select id="occasion" value={occasion} onChange={e => setOccasion(e.target.value)}>
-              <option>Birthday</option>
-              <option>Anniversary</option>
-            </select>
-            <input type="submit" value="Make Your reservation" />
-          </form>
-        </section>
-      );
-  };
+            <Field as="select" id="occasion" name="occasion">
+              <option value="Birthday">Birthday</option>
+              <option value="Anniversary">Anniversary</option>
+            </Field>
+
+            <button type="submit" aria-label="On Click">Make Your reservation</button>
+          </Form>
+        )}
+      </Formik>
+    </section>
+  );
+}
